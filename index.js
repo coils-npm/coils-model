@@ -42,7 +42,7 @@ class CoilsModel extends ModelBase {
 			let {attributes, options} = require(path.resolve(sequelizeModelsPath, file))(sequelize, Sequelize.DataTypes)
 			let Model = require(path.resolve(modelsPath, file))
 			Model.init(attributes, options)
-		Models.push(Model)
+			Models.push(Model)
 	});
 		Models.forEach((Model) => {
 			if (Model.associate) {

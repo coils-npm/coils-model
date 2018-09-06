@@ -29,6 +29,7 @@ module.exports = {
 }
 ```
 * `app/models` will your Models, base: [`path.resolve(modelsPath, '../')`]
+here you can create `ApplicationRecord.js` as your base class Model.
 * `app/models/defines` will put sequelize model defines
 
 

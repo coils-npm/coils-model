@@ -4,12 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_ENV=test mocha --timeout 9000"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cls-hooked": "^4.2.2",
     "sequelize": "^4.38.0"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "mysql2": "^1.6.1",
+    "sequelize-cli": "^4.1.1"
   }
 }
