@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "cls-hooked": "^4.2.2",
-    "coils-utils": "^1.0.1",
+    "coils-utils": "^1.0.2",
     "sequelize": "^4.38.0"
   },
   "devDependencies": {

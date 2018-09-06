@@ -97,3 +97,40 @@ describe("test max", function () {
 		assert( max === 100, 'max fail')
 	})
 })
+
+describe("test transaction", function () {
+	it("transaction, should success", async () => {
+		await User.transaction(async(t) => {
+			await User.find(1)
+			await User.find(2)
+			assert( User._Sequelize._cls.get('transaction') === t, 'auto transaction fail')
+		})
+	})
+})
+
+describe("test transaction lock", function () {
+	it("transaction, should success", async () => {
+		let u = await User.find(1)
+		await u.withLock(async (t) => {
+			let u2 = await User.find(2)
+			await u2.update({username: 'u2 update'})
+			assert( User._Sequelize._cls.get('transaction') === t, 'auto transaction fail')
+		})
+	})
+})
+
+// lock 会创建一个transaction， 如果lock嵌套，内部transaction就会嵌套，但是内部，会判断，当创建的transaction，判断当前执行代码已经在transaction中，将自动使用上层transaction
+describe("test transaction lock nest", function () {
+	it("transaction, should success", async () => {
+		let u = await User.find(1)
+		await u.withLock(async (t) => {
+			let u2 = await User.find(2)
+			await u2.update({username: 'u2 update'})
+			let u3 = await User.find(3)
+			await u3.withLock(async (t2) => {
+				await u3.update({username: 'u3 update'})
+				assert( t === t2 && User._Sequelize._cls.get('transaction') === t, 'auto transaction fail')
+			})
+		})
+	})
+})
