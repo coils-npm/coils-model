@@ -41,9 +41,9 @@ describe("test create", function () {
 		await User.create({username: 'create17', age: 10})
 		await User.create({username: 'create18', age: 10})
 		await User.create({username: 'create19', age: 10})
-		await User.create({username: 'create20', age: 10})
-		await User.create({username: 'create21', age: 10})
-		await User.create({username: 'create21', age: 10})
+		await User.create({username: 'create20', age: 0})
+		await User.create({username: 'create21', age: 25})
+		await User.create({username: 'create21', age: 100})
 		assert( u.id === 1, 'create fail')
 	})
 })
@@ -81,5 +81,19 @@ describe("test where", function () {
 	it("where, should success", async () => {
 		let users = await User.where({username: 'create21'}).where({id: 21}).order([['id', 'desc']])
 		assert( users.length === 1, 'where fail')
+	})
+})
+
+describe("test min", function () {
+	it("min, should success", async () => {
+		let min = await User.min('age')
+		assert( min === 0, 'min fail')
+	})
+})
+
+describe("test max", function () {
+	it("max, should success", async () => {
+		let max = await User.max('age')
+		assert( max === 100, 'max fail')
 	})
 })
