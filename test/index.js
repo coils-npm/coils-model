@@ -134,3 +134,10 @@ describe("test transaction lock nest", function () {
 		})
 	})
 })
+
+describe("test paginate", function () {
+	it("paginate, should success", async () => {
+		let users = await await User.paginate(1, 15)
+		assert( users.length === 15, 'paginate fail')
+	})
+})
