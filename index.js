@@ -51,7 +51,7 @@ class CoilsModel extends ModelBase {
 		}
 	})
 		Object.defineProperties(application, {
-			'$Models': { "get": () => { return Models } }
+			'_Models': { "get": () => { return Models } }
 	})
 		return Models
 	}
