@@ -39,20 +39,20 @@ class CoilsModel extends ModelBase {
 		let Models = []
 		fs.readdirSync(modelsPath).filter((file) => {
 			return (file.indexOf('.') !== 0) && (file.slice(-3) === '.js') && (!path.basename(file).match(/ApplicationRecord/i))
-	}).forEach((file) => {
+		}).forEach((file) => {
 			let {attributes, options} = require(path.resolve(sequelizeModelsPath, file))(sequelize, Sequelize.DataTypes)
 			let Model = require(path.resolve(modelsPath, file))
 			Model.init(attributes, options)
 			Models.push(Model)
-	});
+		});
 		Models.forEach((Model) => {
 			if (Model.associate) {
-			Model.associate(Models);
-		}
-	})
+				Model.associate(Models);
+			}
+		})
 		Object.defineProperties(application, {
 			'_Models': { "get": () => { return Models } }
-	})
+		})
 		return Models
 	}
 	static get _sequelize () {
