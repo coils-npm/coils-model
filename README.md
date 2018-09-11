@@ -1,4 +1,5 @@
 # the npm dependent Sequelize  
+[application._Models]
 
 ### install
 ```
