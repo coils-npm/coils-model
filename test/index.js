@@ -1,9 +1,9 @@
 const assert = require('assert')
 const exec = require('child_process').exec;
-const CoilsModel = require('../index')
+const CoilsModel = require('../lib/index')
 let application = {}
 CoilsModel.mounted(application)
-let [ User ] = application.$Models
+let [ User ] = application._Models
 
 describe("init project", function () {
 	it('resolves', (done) => {

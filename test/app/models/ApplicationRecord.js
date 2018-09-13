@@ -1,4 +1,4 @@
-const CoilsModel = require('../../../index')
+const CoilsModel = require('../../../lib/index')
 class ApplicationRecord extends CoilsModel {
 	constructor () {
 		super (...arguments)

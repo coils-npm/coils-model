@@ -1,8 +1,8 @@
 {
   "name": "coils-model",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "NODE_ENV=test mocha --timeout 9000"
   },
