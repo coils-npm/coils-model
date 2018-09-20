@@ -3,7 +3,7 @@ const exec = require('child_process').exec;
 const CoilsModel = require('../lib/index')
 let application = {}
 CoilsModel.mounted(application)
-let [ User ] = application._Models
+let { User } = application._Models
 
 describe("init project", function () {
 	it('resolves', (done) => {
@@ -139,5 +139,17 @@ describe("test paginate", function () {
 	it("paginate, should success", async () => {
 		let users = await await User.paginate(1, 15)
 		assert( users.length === 15, 'paginate fail')
+	})
+})
+
+describe("test findOrCreateBy", function () {
+	it("findOrCreateBy, should success", async () => {
+		let u1 = await User.findOrCreateBy({username: 'findOrCreateBy1'}, (user) => {
+			user.age = 100
+		})
+		assert( u1.id && u1.age === 100, 'findOrCreateBy fail')
+		
+		let u2 = await User.findOrCreateBy({username: 'findOrCreateBy2'})
+		assert( u2.id && !u2.age, 'findOrCreateBy fail')
 	})
 })
