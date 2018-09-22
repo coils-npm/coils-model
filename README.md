@@ -6,6 +6,12 @@
 npm i coils-model -S
 ```
 
+### Usgae
+```
+application.use(require('coils-model')[, options])
+```
+- `options.sequelizercPath`, default: `path.resolve(process.cwd(), '.sequelizerc')`
+
 
 ### Install `sequelize` dependence
 ```
