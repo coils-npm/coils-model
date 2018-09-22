@@ -1,6 +1,6 @@
 {
   "name": "coils-model",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "cls-hooked": "^4.2.2",
-    "coils-utils": "^1.0.2",
+    "coils-utils": "^1.0.4",
     "sequelize": "^4.38.0"
   },
   "devDependencies": {

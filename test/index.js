@@ -81,6 +81,19 @@ describe("test where", function () {
 	it("where, should success", async () => {
 		let users = await User.where({username: 'create21'}).where({id: 21}).order([['id', 'desc']])
 		assert( users.length === 1, 'where fail')
+		
+		let users2 = await User.where({id: [1, 2, 3]})
+		assert( users2.length === 3, 'where fail')
+	})
+})
+
+describe("test not", function () {
+	it("not, should success", async () => {
+		let count = await User.count()
+		let users = await User.not({id: 4})
+		let users2 = await User.not({id: [1, 2, 3]})
+		assert( users.length === count - 1, 'not fail')
+		assert( users2.length === count - 3, 'not fail')
 	})
 })
 
