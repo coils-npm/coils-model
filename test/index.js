@@ -166,3 +166,18 @@ describe("test findOrCreateBy", function () {
 		assert( u2.id && !u2.age, 'findOrCreateBy fail')
 	})
 })
+
+describe("test increment/decrement", function () {
+	it("increment, should success", async () => {
+		let u2 = await User.findOrCreateBy({username: 'increment', age: 10})
+		await u2.withLock(async () => {
+			await u2.increment('age', 1)
+		})
+		assert( u2.age === 11, 'increment fail')
+		
+		await u2.withLock(async () => {
+			await u2.decrement('age', 3)
+		})
+		assert( u2.age === 8, 'decrement fail')
+	})
+})
