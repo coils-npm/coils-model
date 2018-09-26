@@ -181,3 +181,50 @@ describe("test increment/decrement", function () {
 		assert( u2.age === 8, 'decrement fail')
 	})
 })
+
+describe("test like/notLike", function () {
+	it("like, should success", async () => {
+		await User.findOrCreateBy({username: 'like_me', age: 10})
+		let users = await User.like({username: 'like%'})
+		assert( users.length === 1, 'like fail')
+		
+		let allUsers = await User.all()
+		let notLikeUsers = await User.notLike({username: 'like%'})
+		
+		assert( allUsers.length -1 === notLikeUsers.length, 'notLike fail')
+	})
+})
+
+describe("test regexp/notRegexp", function () {
+	it("regexp, should success", async () => {
+		await User.findOrCreateBy({username: 'regexp_me', age: 10})
+		let users = await User.regexp({username: '^like'})
+		assert( users.length === 1, 'regexp fail')
+		
+		let allUsers = await User.all()
+		let notLikeUsers = await User.notRegexp({username: '^like'})
+		
+		assert( allUsers.length -1 === notLikeUsers.length, 'notRegexp fail')
+	})
+})
+
+describe("test between/notBetween", function () {
+	it("between, should success", async () => {
+		await User.findOrCreateBy({username: 'between_me', age: 120})
+		await User.findOrCreateBy({username: 'between_me', age: 121})
+		let bwUsers = await User.between({age: [120, 121]})
+		assert( bwUsers.length === 2, 'between fail')
+		// notBetween 会忽略掉age为null的条目
+		let allUsers = await User.all().not({age: null})
+		let notBwUsers = await User.notBetween({age: [120, 121]})
+		console.log(await User.between({age: [120, 121]}).count())
+		assert( notBwUsers.length === allUsers.length - bwUsers.length, 'notBetween fail')
+	})
+})
+
+describe("test count", function () {
+	it("count, should success", async () => {
+		let count = await User.between({age: [120, 121]}).count()
+		assert( count === 2, 'count fail')
+	})
+})
